@@ -1,17 +1,17 @@
-import React, {useState, useEffect, useContext} from 'react';
-import ReactDOM, {render} from 'react-dom';
+import React, {useState} from 'react';
+import ReactDOM from 'react-dom';
 import TableList from './Table/TableList';
 import Context from './context';
 import './index.less';
 
-export default function App() {
+function App() {
     const [arr, setArr] = useState([]);
     const [selectedRow, setSelectedRow] = useState({
         name: 'Anna',
         username: 'Korotaeva',
         job: 'frontend',
     });
-    const [isEditMode, setisEditMode] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
 
     function addNewRowInTable() {
         const newObject = {
@@ -31,7 +31,7 @@ export default function App() {
     }
 
     function editRow(id) {
-        const found = arr.find((element) => element.id == id);
+        const found = arr.find((element) => element.id === id);
         setSelectedRow(found);
     }
 
@@ -46,7 +46,8 @@ export default function App() {
     }
 
     return (
-        <Context.Provider value={{removeRow, editRow, setisEditMode}}>
+        <Context.Provider
+            value={{removeRow, editRow, setIsEditMode: setIsEditMode}}>
             <div className='wrapper'>
                 <h1 className='title'>The Table</h1>
                 <TableList data={arr}/>
@@ -100,7 +101,7 @@ export default function App() {
                         </button>
                         <button
                             className='form-button show-button'
-                            onClick={() => setisEditMode(false)}
+                            onClick={() => setIsEditMode(false)}
                         >
                             Cancel
                         </button>
